@@ -1,0 +1,3 @@
+<template>
+  <WelcomeMessage />
+</template>
