@@ -9,6 +9,10 @@ watch(
   (addresses) => {
     if (addresses) {
       addressStore.setAddresses(addresses)
+      const firstAddress = addressStore.addresses[0]
+      if (firstAddress) {
+        addressStore.setSelectedAddress(firstAddress)
+      }
     }
   },
   { immediate: true }

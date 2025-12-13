@@ -9,8 +9,8 @@ type SerializedAddress = Omit<PrismaAddress, "createdAt"> & {
 export type Address = {
   id: number;
   displayName: string;
-  lat: string;
-  lng: string;
+  lat: number;
+  lng: number;
   createdAt: string;
 };
 
@@ -21,14 +21,6 @@ export const useAddressStore = defineStore("address", () => {
   function serializedToStore(address: SerializedAddress): Address {
     return {
       ...address,
-      lat:
-        address.lat < 0
-          ? `${address.lat.toFixed(3)}°S`
-          : `${address.lat.toFixed(3)}°N`,
-      lng:
-        address.lng < 0
-          ? `${address.lng.toFixed(3)}°W`
-          : `${address.lng.toFixed(3)}°E`,
       createdAt: formatDistance(new Date(), new Date(address.createdAt)),
     };
   }

@@ -33,3 +33,12 @@ Start the development server on `http://localhost:3000`:
 ```bash
 npm run dev
 ```
+
+# TODO
+
+- Move map to focus on selected pin
+- Add a loading state
+- Better empty state
+- Code clean up
+- Design clean up
+- Check why address-history-item watch is firing so many times

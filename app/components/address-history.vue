@@ -10,6 +10,10 @@ async function handleDeleteItem(id: number) {
       body: { id }
     })
     addressStore.removeAddress(id)
+    const firstAddress = addressStore.addresses[0]
+    if (firstAddress) {
+      addressStore.setSelectedAddress(firstAddress)
+    }
     console.log('Successfully deleted address:', result)
   } catch (err) {
     console.error('Error deleting address:', err)
