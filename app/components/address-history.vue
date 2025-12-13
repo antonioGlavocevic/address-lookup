@@ -1,5 +1,16 @@
-<script setup lang="ts">
-const { data, error, status } = await useFetch('/api/address', {lazy: true})
+<script lang="ts" setup>
+const { data, error, status } = await useFetch('/api/address', { lazy: true })
+
+async function handleDeleteItem(id: number) {
+  try {
+    await $fetch('/api/address', {
+      method: 'DELETE',
+      body: { id }
+    })
+  } catch (err) {
+    console.error('Error deleting address:', err)
+  }
+}
 </script>
 
 <template>
@@ -9,7 +20,8 @@ const { data, error, status } = await useFetch('/api/address', {lazy: true})
   <div v-else>
     <p v-if="error">{{ error.message }}</p>
     <div v-else-if="data && data.length > 0">
-      <p v-for="address in data" :key="address.id">{{ address.displayName }}</p>
+      <AddressHistoryItem v-for="address in data" :key="address.id" :address="address"
+        @on-delete-item="handleDeleteItem" />
     </div>
     <p v-else>No addresses found.</p>
   </div>

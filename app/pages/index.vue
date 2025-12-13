@@ -1,3 +1,6 @@
 <template>
-  <AddressHistory />
+  <div>
+    <AddressHistory />
+    <AddAddressForm />
+  </div>
 </template>

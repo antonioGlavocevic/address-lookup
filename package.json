@@ -18,7 +18,8 @@
     "eslint": "^9.39.2",
     "nuxt": "^4.2.2",
     "vue": "^3.5.25",
-    "vue-router": "^4.6.3"
+    "vue-router": "^4.6.3",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
