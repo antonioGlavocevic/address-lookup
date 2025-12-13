@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { Trash2 } from 'lucide-vue-next';
 import type { Address } from '~/stores/address';
 import { formatLatLng } from '~/utils/latlng';
 
@@ -29,17 +30,21 @@ watch(
 </script>
 
 <template>
-  <div class="border shadow rounded-xl p-4 hover:bg-neutral-300 hover:cursor-pointer"
-    :class="{ 'bg-neutral-200': isSelected }" @click="handleCardClick">
-    <p class="mb-2 font-medium leading-relaxed">{{ address.displayName }}</p>
-    <div class="flex gap-1 items-start justify-between">
+  <div
+    class="bg-slate-50 border border-slate-500 shadow rounded-xl p-4 transition has-[p:first-child:hover]:-translate-y-0.5 first:mt-0.5"
+    :class="{ 'border-y-4': isSelected, 'border-slate-950': isSelected, 'shadow-lg': isSelected }">
+    <p class="mb-2 font-medium leading-relaxed hover:underline hover:cursor-pointer" @click="handleCardClick">{{
+      address.displayName }}</p>
+    <div class="flex gap-1 items-center justify-between">
       <div>
-        <p class="text-sm text-muted-foreground">{{ formatLatLng(address) }}</p>
-        <p class="text-xs text-muted-foreground">Created {{ address.createdAt }}</p>
+        <p class="">{{ formatLatLng(address) }}</p>
+        <p class="text-xs">Created {{ address.createdAt }}</p>
       </div>
       <button
         class="p-2 text-sm bg-white text-red-500 border border-red-500 hover:bg-red-500 hover:text-white hover:cursor-pointer rounded z-10"
-        @click="handleDeleteClicked">Delete</button>
+        @click="handleDeleteClicked">
+        <Trash2 class="size-5" />
+      </button>
     </div>
   </div>
 </template>

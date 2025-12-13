@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "setup": "cp sample.env .env && prisma migrate deploy && prisma generate",
+    "reset": "prisma migrate reset -f && prisma generate",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "prisma:reset": "prisma migrate reset -f && prisma generate"
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "@nuxt/eslint": "1.12.1",
@@ -21,6 +21,7 @@
     "dotenv": "^17.2.3",
     "eslint": "^9.39.2",
     "leaflet": "^1.9.4",
+    "lucide-vue-next": "^0.561.0",
     "nuxt": "^4.2.2",
     "tailwindcss": "^4.1.18",
     "vue": "^3.5.25",

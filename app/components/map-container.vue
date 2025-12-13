@@ -7,17 +7,15 @@ let map: leaflet.Map | null = null;
 let marker: leaflet.Marker | null = null;
 let pendingRequest = false;
 
-function removeMarker() {
-  if (marker && map) {
+function removeMarker(map: leaflet.Map) {
+  if (marker) {
     map.removeLayer(marker);
   }
   marker = null;
 }
 
-function addMarkerAtPosition(pos: { lat: number; lng: number }) {
-  if (map) {
-    marker = leaflet.marker(pos).addTo(map);
-  }
+function addMarkerAtPosition(map: leaflet.Map, pos: { lat: number; lng: number }) {
+  marker = leaflet.marker(pos).addTo(map);
 }
 
 async function handleClick(e: leaflet.LeafletMouseEvent) {
@@ -51,7 +49,7 @@ onMounted(() => {
 
   // Add marker for selected address on load if already selected
   if (selectedAddress) {
-    addMarkerAtPosition(selectedAddress);
+    addMarkerAtPosition(map, selectedAddress);
   }
 
   map.on("click", handleClick);
@@ -60,10 +58,16 @@ onMounted(() => {
 // Watch for changes in selected address to update marker
 watch(
   () => addressStore.selectedAddress,
-  (newAddress) => {
-    removeMarker();
+  (newAddress, oldAddress) => {
+    if (!map) return;
+    if (newAddress?.id === oldAddress?.id) return;
+    removeMarker(map);
     if (newAddress === null) return;
-    addMarkerAtPosition(newAddress);
+    addMarkerAtPosition(map, newAddress);
+    map.flyTo(newAddress, defaultZoom, {
+      animate: true,
+      duration: 1,
+    })
   }
 )
 
