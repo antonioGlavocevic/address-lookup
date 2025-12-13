@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@nuxt/eslint": "1.12.1",
+    "@pinia/nuxt": "^0.11.3",
     "@prisma/adapter-better-sqlite3": "^7.1.0",
     "@prisma/client": "^7.1.0",
     "@tailwindcss/vite": "^4.1.18",

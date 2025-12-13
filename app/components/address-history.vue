@@ -1,10 +1,7 @@
 <script lang="ts" setup>
-const { data, error, status } = await useFetch('/api/address', { lazy: true })
+import { useAddressStore } from '~/stores/address'
 
-const addresses = computed(() => data.value?.map(addr => ({
-  ...addr,
-  createdAt: new Date(addr.createdAt)
-})) ?? [])
+const addressStore = useAddressStore()
 
 async function handleDeleteItem(id: number) {
   try {
@@ -12,6 +9,7 @@ async function handleDeleteItem(id: number) {
       method: 'DELETE',
       body: { id }
     })
+    addressStore.removeAddress(id)
     console.log('Successfully deleted address:', result)
   } catch (err) {
     console.error('Error deleting address:', err)
@@ -22,12 +20,10 @@ async function handleDeleteItem(id: number) {
 <template>
   <div class="w-96 max-h-full bg-white flex flex-col">
     <h2 class="p-4 pt-6 text-xl font-bold border-b-4">Address History</h2>
-    <div class="p-4 grid gap-4 grow overflow-scroll">
-      <p v-if="status === 'pending'">Loading...</p>
-      <p v-else-if="error">{{ error.message }}</p>
-      <AddressHistoryItem v-else-if="addresses.length > 0" v-for="address in addresses" :key="address.id"
-        :address="address" @on-delete-item="handleDeleteItem" />
-      <p v-else>No addresses found.</p>
+    <div class="p-4 flex flex-col gap-4 grow overflow-scroll">
+      <p v-if="addressStore.addresses.length === 0">No addresses found.</p>
+      <AddressHistoryItem v-else v-for="address in addressStore.addresses" :key="address.id" :address="address"
+        @on-delete-item="handleDeleteItem" />
     </div>
   </div>
 </template>

@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import leaflet from 'leaflet';
 
+const addressStore = useAddressStore()
+
 let map: leaflet.Map | null = null;
 let marker: leaflet.Marker | null = null;
 let pendingRequest = false;
@@ -29,6 +31,7 @@ async function handleClick(e: leaflet.LeafletMouseEvent) {
       method: 'POST',
       body: { lat, lng }
     })
+    addressStore.addAddress(result)
     console.log('Successfully added address:', result)
   } catch (error) {
     removeMarker();
