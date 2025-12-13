@@ -11,6 +11,6 @@ model Address {
   id          Int      @id @default(autoincrement())
   displayName String   @map("display_name")
   lat         Float
-  lon         Float
+  lng         Float
   createdAt   DateTime @default(now()) @map("created_at")
 }

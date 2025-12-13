@@ -3,7 +3,7 @@ import { db } from "~~/prisma/db";
 
 const bodySchema = z.object({
   lat: z.number(),
-  lon: z.number(),
+  lng: z.number(),
 });
 
 export default defineEventHandler(async (event) => {
@@ -14,9 +14,10 @@ export default defineEventHandler(async (event) => {
       createError({ statusCode: 422, statusMessage: "Invalid request body" })
     );
   }
+  const { lat, lng } = parsedBody.data;
   const resp = await $fetch(
     geocodingRequestUrl,
-    buildGeocodingRequestOptions(parsedBody.data.lat, parsedBody.data.lon)
+    buildGeocodingRequestOptions(lat, lng)
   );
   const parseResp = geocodingResponseSchema.safeParse(resp);
   if (!parseResp.success) {
@@ -31,8 +32,8 @@ export default defineEventHandler(async (event) => {
   const address = await db.address.create({
     data: {
       displayName: parseResp.data.display_name || "Unknown address",
-      lat: parsedBody.data.lat,
-      lon: parsedBody.data.lon,
+      lat,
+      lng,
     },
   });
   return address;

@@ -3,6 +3,6 @@ CREATE TABLE "Address" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "display_name" TEXT NOT NULL,
     "lat" REAL NOT NULL,
-    "lon" REAL NOT NULL,
+    "lng" REAL NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

@@ -1,6 +1,14 @@
 <script lang="ts" setup>
 const { data, error, status } = await useFetch('/api/address', { lazy: true })
 
+const addresses = computed(() => data.value?.map(addr => ({
+  id: addr.id,
+  displayName: addr.displayName,
+  lat: addr.lat,
+  lng: addr.lng,
+  createdAt: new Date(addr.createdAt)
+})) ?? [])
+
 async function handleDeleteItem(id: number) {
   try {
     const result = await $fetch('/api/address', {
@@ -15,15 +23,14 @@ async function handleDeleteItem(id: number) {
 </script>
 
 <template>
-  <div v-if="status === 'pending'">
-    <p>Loading...</p>
-  </div>
-  <div v-else>
-    <p v-if="error">{{ error.message }}</p>
-    <div v-else-if="data && data.length > 0">
-      <AddressHistoryItem v-for="address in data" :key="address.id" :address="address"
-        @on-delete-item="handleDeleteItem" />
+  <div>
+    <h2>Address History</h2>
+    <div>
+      <p v-if="status === 'pending'">Loading...</p>
+      <p v-else-if="error">{{ error.message }}</p>
+      <AddressHistoryItem v-else-if="addresses.length > 0" v-for="address in addresses" :key="address.id"
+        :address="address" @on-delete-item="handleDeleteItem" />
+      <p v-else>No addresses found.</p>
     </div>
-    <p v-else>No addresses found.</p>
   </div>
 </template>

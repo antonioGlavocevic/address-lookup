@@ -1,6 +1,8 @@
 import { db } from "~~/prisma/db";
 
 export default defineEventHandler(async () => {
-  const addresses = await db.address.findMany();
+  const addresses = await db.address.findMany({
+    orderBy: { createdAt: "desc" },
+  });
   return addresses;
 });
