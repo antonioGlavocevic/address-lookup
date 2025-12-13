@@ -2,10 +2,7 @@
 const { data, error, status } = await useFetch('/api/address', { lazy: true })
 
 const addresses = computed(() => data.value?.map(addr => ({
-  id: addr.id,
-  displayName: addr.displayName,
-  lat: addr.lat,
-  lng: addr.lng,
+  ...addr,
   createdAt: new Date(addr.createdAt)
 })) ?? [])
 
@@ -23,9 +20,9 @@ async function handleDeleteItem(id: number) {
 </script>
 
 <template>
-  <div>
-    <h2>Address History</h2>
-    <div>
+  <div class="w-96 max-h-full bg-white flex flex-col">
+    <h2 class="p-4 pt-6 text-xl font-bold border-b-4">Address History</h2>
+    <div class="p-4 grid gap-4 grow overflow-scroll">
       <p v-if="status === 'pending'">Loading...</p>
       <p v-else-if="error">{{ error.message }}</p>
       <AddressHistoryItem v-else-if="addresses.length > 0" v-for="address in addresses" :key="address.id"

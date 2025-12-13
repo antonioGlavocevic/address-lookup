@@ -57,13 +57,5 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div id="map" />
+  <div id="map" class="min-w-75 h-full grow" />
 </template>
-
-<style scoped>
-#map {
-  margin: auto;
-  width: 500px;
-  height: 500px;
-}
-</style>
