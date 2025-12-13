@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Address {
+  id          Int      @id @default(autoincrement())
+  displayName String   @map("display_name")
+  long        Float
+  lat         Float
+  createdAt   DateTime @default(now()) @map("created_at")
+}

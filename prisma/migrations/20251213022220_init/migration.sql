@@ -1,0 +1,8 @@
+-- CreateTable
+CREATE TABLE "Address" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "display_name" TEXT NOT NULL,
+    "long" REAL NOT NULL,
+    "lat" REAL NOT NULL,
+    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

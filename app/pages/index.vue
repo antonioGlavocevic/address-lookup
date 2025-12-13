@@ -1,3 +1,3 @@
 <template>
-  <WelcomeMessage />
+  <AddressHistory />
 </template>

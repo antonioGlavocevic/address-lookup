@@ -7,13 +7,23 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "prisma:reset": "prisma migrate reset -f && prisma generate"
   },
   "dependencies": {
     "@nuxt/eslint": "1.12.1",
+    "@prisma/adapter-better-sqlite3": "^7.1.0",
+    "@prisma/client": "^7.1.0",
+    "dotenv": "^17.2.3",
     "eslint": "^9.39.2",
     "nuxt": "^4.2.2",
     "vue": "^3.5.25",
     "vue-router": "^4.6.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^25.0.1",
+    "prisma": "^7.1.0",
+    "tsx": "^4.21.0"
   }
 }
