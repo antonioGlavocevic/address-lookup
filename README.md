@@ -1,23 +1,29 @@
-# Nuxt Minimal Starter
+# Address Lookup Example
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Prerequisites
+
+### Node Version
+
+Tested on node v22.18.0 only but should work on anything v20.19+, v22.12+, or v24.0+ (main constraint is Prisma)
 
 ## Setup
 
 Make sure to install dependencies:
 
 ```bash
-# npm
 npm install
+```
 
-# pnpm
-pnpm install
+Run the setup script to create sqlite db at ./dev.db and env at ./.env (only need to do this once or if db/env is deleted):
 
-# yarn
-yarn install
+```bash
+npm run setup
+```
 
-# bun
-bun install
+If you ever want to reset the db run:
+
+```bash
+npm run prisma:reset
 ```
 
 ## Development Server
@@ -25,51 +31,5 @@ bun install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
