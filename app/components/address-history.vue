@@ -3,10 +3,11 @@ const { data, error, status } = await useFetch('/api/address', { lazy: true })
 
 async function handleDeleteItem(id: number) {
   try {
-    await $fetch('/api/address', {
+    const result = await $fetch('/api/address', {
       method: 'DELETE',
       body: { id }
     })
+    console.log('Successfully deleted address:', result)
   } catch (err) {
     console.error('Error deleting address:', err)
   }
