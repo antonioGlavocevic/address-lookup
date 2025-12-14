@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { Trash2 } from 'lucide-vue-next';
-import type { Address } from '~/stores/address';
 import { formatLatLng } from '~/utils/latlng';
 
 const { address } = defineProps<{ address: Address }>();
@@ -31,7 +30,7 @@ watch(
 
 <template>
   <div
-    class="bg-slate-50 border border-slate-500 shadow rounded-xl p-4 transition has-[p:first-child:hover]:-translate-y-0.5 first:mt-0.5"
+    class="bg-slate-50 border border-slate-500 shadow rounded-xl p-4 transition has-[p:first-child:hover]:-translate-y-0.5 has-[p:first-child:hover]:border-sky-500"
     :class="{ 'border-y-4': isSelected, 'border-slate-950': isSelected, 'shadow-lg': isSelected }">
     <p class="mb-2 font-medium leading-relaxed hover:underline hover:cursor-pointer" @click="handleCardClick">{{
       address.displayName }}</p>
@@ -41,7 +40,7 @@ watch(
         <p class="text-xs">Created {{ address.createdAt }}</p>
       </div>
       <button
-        class="p-2 text-sm bg-white text-red-500 border border-red-500 hover:bg-red-500 hover:text-white hover:cursor-pointer rounded z-10"
+        class="p-2 text-sm bg-white text-red-500 border border-red-500 hover:bg-red-500 hover:text-white hover:cursor-pointer rounded"
         @click="handleDeleteClicked">
         <Trash2 class="size-5" />
       </button>

@@ -23,6 +23,8 @@ async function handleClick(e: leaflet.LeafletMouseEvent) {
   if (pendingRequest) return;
   pendingRequest = true;
   const { lat, lng } = e.latlng;
+  const preResult = { id: PRE_ADDRESS_ID, lat, lng, displayName: 'Loading...', createdAt: "" };
+  addressStore.setSelectedAddress(preResult);
   try {
     const result = await $fetch('/api/address', {
       method: 'POST',
@@ -60,7 +62,9 @@ watch(
   () => addressStore.selectedAddress,
   (newAddress, oldAddress) => {
     if (!map) return;
-    if (newAddress?.id === oldAddress?.id) return;
+    // Avoid unnecessary updates if coordinates are the same
+    if (newAddress?.lat.toFixed(6) === oldAddress?.lat.toFixed(6)
+      && newAddress?.lng.toFixed(6) === oldAddress?.lng.toFixed(6)) return;
     removeMarker(map);
     if (newAddress === null) return;
     addMarkerAtPosition(map, newAddress);
@@ -82,5 +86,5 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div id="map" class="min-w-75 h-full grow" />
+  <div id="map" class="min-w-75 h-full grow z-10" />
 </template>

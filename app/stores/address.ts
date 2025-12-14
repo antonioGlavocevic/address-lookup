@@ -14,6 +14,8 @@ export type Address = {
   createdAt: string;
 };
 
+export const PRE_ADDRESS_ID = -1;
+
 export const useAddressStore = defineStore("address", () => {
   const addresses = ref<Address[]>([]);
   const selectedAddress = ref<Address | null>(null);

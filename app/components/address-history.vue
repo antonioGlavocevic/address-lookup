@@ -23,14 +23,14 @@ async function handleDeleteItem(id: number) {
 </script>
 
 <template>
-  <div class="w-96 max-h-full bg-slate-50 flex flex-col border-l-2 border-slate-800">
-    <div class="p-4 pt-6 flex gap-2 items-center border-b-4 border-slate-800">
+  <div class="max-h-full w-96 bg-slate-50 flex flex-col border-l-2 border-slate-800 overflow-scroll">
+    <div class="sticky top-0 p-4 pt-6 flex gap-2 items-center border-b-4 border-slate-800 bg-slate-50 z-10">
       <MapPin class="size-6" />
       <h2 class="text-xl font-bold">Address History</h2>
     </div>
-    <div class="p-4 bg-slate-200 grow">
+    <div class="p-4">
       <AddressEmptyState v-if="addressStore.addresses.length === 0" />
-      <TransitionGroup v-else class="flex flex-col gap-4 grow overflow-scroll" name="history-list" tag="div">
+      <TransitionGroup v-else class="flex flex-col gap-4" name="history-list" tag="div">
         <AddressHistoryItem v-for="address in addressStore.addresses" :key="address.id" :address="address"
           @on-delete-item="handleDeleteItem" />
       </TransitionGroup>
