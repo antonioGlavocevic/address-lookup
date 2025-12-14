@@ -24,7 +24,7 @@ async function handleClick(e: leaflet.LeafletMouseEvent) {
   pendingRequest = true;
   // .wrap() normalises coordinates to be within -180 to 180 for lng
   const { lat, lng } = e.latlng.wrap();
-  const preResult = { id: PRE_ADDRESS_ID, lat, lng, displayName: 'Loading...', createdAt: "" };
+  const preResult = { id: PRE_ADDRESS_ID, lat, lng, displayName: PRE_ADDRESS_DISPLAY_NAME, createdAt: "" };
   addressStore.setSelectedAddress(preResult);
   try {
     const result = await $fetch('/api/address', {

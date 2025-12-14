@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { MapPin } from 'lucide-vue-next'
+import { History } from 'lucide-vue-next'
 import { useAddressStore } from '~/stores/address'
 
 const addressStore = useAddressStore()
@@ -23,9 +23,9 @@ async function handleDeleteItem(id: number) {
 </script>
 
 <template>
-  <div class="max-h-full w-96 bg-slate-50 flex flex-col border-l-2 border-slate-800 overflow-scroll">
-    <div class="sticky top-0 p-4 pt-6 flex gap-2 items-center border-b-4 border-slate-800 bg-slate-50 z-10">
-      <MapPin class="size-6" />
+  <div class="max-h-full w-96 bg-sky-50 flex flex-col border-l-4 border-sky-800 overflow-scroll">
+    <div class="sticky top-0 p-4 pt-6 flex gap-2 items-center border-b-4 border-sky-800 bg-sky-50 z-10">
+      <History class="size-6" />
       <h2 class="text-xl font-bold">Address History</h2>
     </div>
     <div class="p-4">

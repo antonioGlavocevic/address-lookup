@@ -30,8 +30,8 @@ watch(
 
 <template>
   <div
-    class="bg-slate-50 border border-slate-500 shadow rounded-xl p-4 transition has-[p:first-child:hover]:-translate-y-0.5 has-[p:first-child:hover]:border-sky-500"
-    :class="{ 'border-y-4': isSelected, 'border-slate-950': isSelected, 'shadow-lg': isSelected }">
+    class="bg-white border border-sky-950 shadow rounded-xl p-4 transition has-[p:first-child:hover]:-translate-y-0.5 has-[p:first-child:hover]:border-sky-500"
+    :class="{ 'border-y-4': isSelected, 'shadow-lg': isSelected }">
     <p class="mb-2 font-medium leading-relaxed hover:underline hover:cursor-pointer" @click="handleCardClick">{{
       address.displayName }}</p>
     <div class="flex gap-1 items-center justify-between">

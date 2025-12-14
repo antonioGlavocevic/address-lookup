@@ -15,6 +15,7 @@ export type Address = {
 };
 
 export const PRE_ADDRESS_ID = -1;
+export const PRE_ADDRESS_DISPLAY_NAME = "Loading...";
 
 export const useAddressStore = defineStore("address", () => {
   const addresses = ref<Address[]>([]);

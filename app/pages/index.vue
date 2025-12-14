@@ -20,7 +20,7 @@ watch(
 </script>
 
 <template>
-  <div class="relative w-full h-svh flex justify-end">
+  <div class="relative w-full h-svh flex justify-end text-sky-900">
     <AddressSelectedCard />
     <ClientOnly>
       <MapContainer />
