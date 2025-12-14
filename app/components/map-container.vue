@@ -22,7 +22,8 @@ async function handleClick(e: leaflet.LeafletMouseEvent) {
   // Prevent multiple requests at the same time
   if (pendingRequest) return;
   pendingRequest = true;
-  const { lat, lng } = e.latlng;
+  // .wrap() normalises coordinates to be within -180 to 180 for lng
+  const { lat, lng } = e.latlng.wrap();
   const preResult = { id: PRE_ADDRESS_ID, lat, lng, displayName: 'Loading...', createdAt: "" };
   addressStore.setSelectedAddress(preResult);
   try {
@@ -43,10 +44,18 @@ async function handleClick(e: leaflet.LeafletMouseEvent) {
 onMounted(() => {
   const selectedAddress = addressStore.selectedAddress;
 
-  map = leaflet.map('map').setView(selectedAddress ?? defaultPosition, defaultZoom);
+  map = leaflet.map('map', {
+    // Keep map in eligible geocoding bounds
+    maxBounds: [
+      [-90, -180],
+      [90, 180],
+    ],
+    worldCopyJump: false,
+  }).setView(selectedAddress ?? defaultPosition, defaultZoom);
   leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom,
+    noWrap: true
   }).addTo(map);
 
   // Add marker for selected address on load if already selected
