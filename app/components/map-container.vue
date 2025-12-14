@@ -45,10 +45,10 @@ onMounted(() => {
   const selectedAddress = addressStore.selectedAddress;
 
   map = leaflet.map('map', {
-    // Keep map in eligible geocoding bounds
+    // Keep map in eligible geocoding bounds with some padding for better UX
     maxBounds: [
-      [-90, -180],
-      [90, 180],
+      [-180, -360],
+      [180, 360],
     ],
     worldCopyJump: false,
   }).setView(selectedAddress ?? defaultPosition, defaultZoom);
