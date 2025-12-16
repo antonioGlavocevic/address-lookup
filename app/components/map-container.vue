@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import leaflet from 'leaflet';
 
-const addressStore = useAddressStore()
+const addressStore = useAddressStore();
 
 let map: leaflet.Map | null = null;
 let marker: leaflet.Marker | null = null;

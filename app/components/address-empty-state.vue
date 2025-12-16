@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Inbox } from 'lucide-vue-next'
+import { Inbox } from 'lucide-vue-next';
 </script>
 
 <template>

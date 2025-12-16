@@ -7,6 +7,7 @@ const bodySchema = z.object({
 });
 
 export default defineEventHandler(async (event) => {
+  // Get payload
   const parsedBody = await readValidatedBody(event, bodySchema.safeParse);
   if (!parsedBody.success) {
     return sendError(
@@ -15,6 +16,8 @@ export default defineEventHandler(async (event) => {
     );
   }
   const { lat, lng } = parsedBody.data;
+
+  // Geocode lat/lng to address
   const resp = await $fetch(
     geocodingRequestUrl,
     buildGeocodingRequestOptions(lat, lng)
@@ -29,6 +32,8 @@ export default defineEventHandler(async (event) => {
       })
     );
   }
+
+  // Store address in DB
   const address = await db.address.create({
     data: {
       displayName: parseResp.data.display_name || "Unknown address",
@@ -36,5 +41,6 @@ export default defineEventHandler(async (event) => {
       lng,
     },
   });
+
   return address;
 });

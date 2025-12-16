@@ -1,23 +1,23 @@
 <script lang="ts" setup>
-import { History } from 'lucide-vue-next'
-import { useAddressStore } from '~/stores/address'
+import { History } from 'lucide-vue-next';
+import { useAddressStore } from '~/stores/address';
 
-const addressStore = useAddressStore()
+const addressStore = useAddressStore();
 
 async function handleDeleteItem(id: number) {
   try {
     const result = await $fetch('/api/address', {
       method: 'DELETE',
       body: { id }
-    })
-    addressStore.removeAddress(id)
+    });
+    addressStore.removeAddress(id);
     if (addressStore.selectedAddress?.id === id) {
-      const firstAddress = addressStore.addresses[0]
-      addressStore.setSelectedAddress(firstAddress ?? null)
+      const firstAddress = addressStore.addresses[0];
+      addressStore.setSelectedAddress(firstAddress ?? null);
     }
-    console.log('Successfully deleted address:', result)
+    console.log('Successfully deleted address:', result);
   } catch (err) {
-    console.error('Error deleting address:', err)
+    console.error('Error deleting address:', err);
   }
 }
 </script>

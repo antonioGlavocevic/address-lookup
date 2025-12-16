@@ -36,5 +36,4 @@ npm run dev
 
 # TODO
 
-- Code clean up
 - Check why address-history-item watch is firing so many times
